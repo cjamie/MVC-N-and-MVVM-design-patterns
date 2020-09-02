@@ -44,6 +44,10 @@
 		42F84AB61E6950280029C1E6 /* HomeProductsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F84AB51E6950280029C1E6 /* HomeProductsViewController.swift */; };
 		42F84AB81E6950350029C1E6 /* BusinessProductsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F84AB71E6950350029C1E6 /* BusinessProductsViewController.swift */; };
 		42F84ABF1E6953120029C1E6 /* ProductCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F84ABE1E6953120029C1E6 /* ProductCollectionViewCell.swift */; };
+		7D6BF72325003E2200C824D7 /* NetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6BF71F25003E2100C824D7 /* NetworkClient.swift */; };
+		7D6BF72425003E2200C824D7 /* Int+HTTPStatusCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6BF72025003E2100C824D7 /* Int+HTTPStatusCode.swift */; };
+		7D6BF72525003E2200C824D7 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6BF72125003E2100C824D7 /* NetworkError.swift */; };
+		7D6BF72625003E2200C824D7 /* UIImageView+URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6BF72225003E2100C824D7 /* UIImageView+URL.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -87,6 +91,10 @@
 		42F84AB51E6950280029C1E6 /* HomeProductsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeProductsViewController.swift; sourceTree = "<group>"; };
 		42F84AB71E6950350029C1E6 /* BusinessProductsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BusinessProductsViewController.swift; sourceTree = "<group>"; };
 		42F84ABE1E6953120029C1E6 /* ProductCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductCollectionViewCell.swift; sourceTree = "<group>"; };
+		7D6BF71F25003E2100C824D7 /* NetworkClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkClient.swift; sourceTree = "<group>"; };
+		7D6BF72025003E2100C824D7 /* Int+HTTPStatusCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Int+HTTPStatusCode.swift"; sourceTree = "<group>"; };
+		7D6BF72125003E2100C824D7 /* NetworkError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		7D6BF72225003E2100C824D7 /* UIImageView+URL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+URL.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +128,7 @@
 		422FEA5B1E675E8800AFDC41 /* RWClean */ = {
 			isa = PBXGroup;
 			children = (
+				7D6BF72725003E2700C824D7 /* Networking */,
 				422FEA731E67608200AFDC41 /* App */,
 				7D6BF70E2500343E00C824D7 /* Cleaning_Services */,
 				7D6BF7112500345100C824D7 /* Home_Information */,
@@ -346,6 +355,33 @@
 			name = Controller;
 			sourceTree = "<group>";
 		};
+		7D6BF72725003E2700C824D7 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				7D6BF71F25003E2100C824D7 /* NetworkClient.swift */,
+				7D6BF72925003E3A00C824D7 /* Models */,
+				7D6BF72825003E3600C824D7 /* Extensions */,
+			);
+			name = Networking;
+			sourceTree = "<group>";
+		};
+		7D6BF72825003E3600C824D7 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				7D6BF72225003E2100C824D7 /* UIImageView+URL.swift */,
+				7D6BF72025003E2100C824D7 /* Int+HTTPStatusCode.swift */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
+		7D6BF72925003E3A00C824D7 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				7D6BF72125003E2100C824D7 /* NetworkError.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -427,6 +463,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				422FEA8C1E676B4D00AFDC41 /* BathroomCountViewController.swift in Sources */,
+				7D6BF72525003E2200C824D7 /* NetworkError.swift in Sources */,
 				428766A41E69344E001D72E5 /* CleaningServicesTableViewController.swift in Sources */,
 				429ECFBD1E744DA3000E6A8C /* LoadingHUD.swift in Sources */,
 				42F164DF1E6C494400B90E22 /* MenuTableViewController.swift in Sources */,
@@ -438,11 +475,14 @@
 				42F84AB61E6950280029C1E6 /* HomeProductsViewController.swift in Sources */,
 				429ECFC01E744DB9000E6A8C /* UIViewController+LoadingHUD.swift in Sources */,
 				420B9B541E68D61000972DA3 /* WelcomePageViewController.swift in Sources */,
+				7D6BF72425003E2200C824D7 /* Int+HTTPStatusCode.swift in Sources */,
 				42F84ABF1E6953120029C1E6 /* ProductCollectionViewCell.swift in Sources */,
 				4276FCB61EB3E629004E96B9 /* ParentPushSegue.swift in Sources */,
+				7D6BF72325003E2200C824D7 /* NetworkClient.swift in Sources */,
 				422FEA8E1E676B6200AFDC41 /* KitchenSizeViewController.swift in Sources */,
 				42F162C01E6C382C00B90E22 /* CollectionViewCenterFlowLayout.swift in Sources */,
 				422FEA881E67687100AFDC41 /* HomeInfo.swift in Sources */,
+				7D6BF72625003E2200C824D7 /* UIImageView+URL.swift in Sources */,
 				422FEA941E676BDD00AFDC41 /* HomeInfoViewController.swift in Sources */,
 				421BD4291E68A887002F1F3C /* RoomSize.swift in Sources */,
 				4276FCB31EB3E1DE004E96B9 /* StartHomeInfoViewController.swift in Sources */,

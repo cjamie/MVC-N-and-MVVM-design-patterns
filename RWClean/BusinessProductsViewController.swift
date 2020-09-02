@@ -5,9 +5,14 @@ public class BusinessProductsViewController: UIViewController {
     // MARK: - Instance Properties
 
     internal var imageTasks: [IndexPath: URLSessionDataTask] = [:]
-    internal var products: [Product] = []
-    internal let session = URLSession.shared
+    internal var products: [Product] = [] {
+        didSet {
+            collectionView.reloadData()
+        }
+    }
 
+    let productLoader: ProductLoader = NetworkClient.shared
+    
     // MARK: - Outlets
 
     @IBOutlet internal var collectionView: UICollectionView! {
@@ -23,37 +28,19 @@ public class BusinessProductsViewController: UIViewController {
 
     @objc internal func loadProducts() {
         collectionView.refreshControl?.beginRefreshing()
-        let url = URL(string: "https://rwcleanbackend.herokuapp.com/products/business")!
-        let task = session.dataTask(with: url, completionHandler: { data, _, error in
-            if let error = error {
-                print("Product download failed: \(error)")
-                return
-            }
-            guard let data = data else {
-                print("Product download failed: data is nil!")
-                return
-            }
-            let jsonArray: [[String: Any]]
-            do {
-                guard let jsonObject = try JSONSerialization.jsonObject(with: data) as? [[String: Any]] else {
-                    print("Product download failed: invalid JSON")
-                    return
-                }
-                jsonArray = jsonObject
 
-            } catch {
-                print("Product download failed: invalid JSON")
-                return
+        productLoader.getProducts(for: .business) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let products):
+                self.products = products
+            case .failure(let error):
+                print("-=- \(self) \(error.localizedDescription)")
             }
-            let products = Product.array(jsonArray: jsonArray)
-            DispatchQueue.main.async { [weak self] in
-                guard let strongSelf = self else { return }
-                strongSelf.products = products
-                strongSelf.collectionView.refreshControl?.endRefreshing()
-                strongSelf.collectionView.reloadData()
-            }
-    })
-        task.resume()
+            self.collectionView.refreshControl?.endRefreshing()
+
+        }
+    
     }
 
     // MARK: - View Lifecycle
@@ -88,38 +75,36 @@ extension BusinessProductsViewController: UICollectionViewDataSource {
     }
 
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cellIdentifier = "ProductCell"
 
         let product = products[indexPath.row]
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier,
-                                                      for: indexPath) as! ProductCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProductCollectionViewCell.reuseIdentifier, for: indexPath) as! ProductCollectionViewCell
         cell.label.text = product.title
 
         imageTasks[indexPath]?.cancel()
 
-        if let url = product.imageURL {
-            let task = session.dataTask(with: url, completionHandler: { [weak cell]
-                data, _, error in
-
-                if let error = error {
-                    print("Image download failed: \(error)")
-                    return
-                }
-
-                guard let cell = cell,
-                    let data = data,
-                    let image = UIImage(data: data) else {
-                    print("Image download failed: invalid image data!")
-                    return
-                }
-                DispatchQueue.main.async { [weak cell] in
-                    guard let cell = cell else { return }
-                    cell.imageView.image = image
-                }
-      })
-            imageTasks[indexPath] = task
-            task.resume()
-        }
+//        if let url = product.imageURL {
+//            let task = session.dataTask(with: url, completionHandler: { [weak cell]
+//                data, _, error in
+//
+//                if let error = error {
+//                    print("Image download failed: \(error)")
+//                    return
+//                }
+//
+//                guard let cell = cell,
+//                    let data = data,
+//                    let image = UIImage(data: data) else {
+//                    print("Image download failed: invalid image data!")
+//                    return
+//                }
+//                DispatchQueue.main.async { [weak cell] in
+//                    guard let cell = cell else { return }
+//                    cell.imageView.image = image
+//                }
+//      })
+//            imageTasks[indexPath] = task
+//            task.resume()
+//        }
         return cell
     }
 }

@@ -5,9 +5,14 @@ public class HomeProductsViewController: UIViewController {
     // MARK: - Instance Properties
 
     internal var imageTasks: [IndexPath: URLSessionDataTask] = [:]
-    internal var products: [Product] = []
+    internal var products: [Product] = [] {
+        didSet {
+            collectionView.reloadData()
+        }
+    }
     internal let session = URLSession.shared
-
+    let productLoader: ProductLoader = NetworkClient.shared
+    
     // MARK: - Outlets
 
     @IBOutlet internal var collectionView: UICollectionView! {
@@ -23,37 +28,15 @@ public class HomeProductsViewController: UIViewController {
 
     @objc internal func loadProducts() {
         collectionView.refreshControl?.beginRefreshing()
-        let url = URL(string: "https://rwcleanbackend.herokuapp.com/products/home")!
-        let task = session.dataTask(with: url, completionHandler: { data, _, error in
-            if let error = error {
-                print("Product download failed: \(error)")
-                return
+        
+        productLoader.getProducts(for: .home) { [weak self] homeProductResult in
+            switch homeProductResult {
+            case .failure(let networkError):
+                print("-=- network error \(networkError.localizedDescription)")
+            case .success(let products):
+                self?.products = products
             }
-            guard let data = data else {
-                print("Product download failed: data is nil!")
-                return
-            }
-            let jsonArray: [[String: Any]]
-            do {
-                guard let jsonObject = try JSONSerialization.jsonObject(with: data) as? [[String: Any]] else {
-                    print("Product download failed: invalid JSON")
-                    return
-                }
-                jsonArray = jsonObject
-
-            } catch {
-                print("Product download failed: invalid JSON")
-                return
-            }
-            let products = Product.array(jsonArray: jsonArray)
-            DispatchQueue.main.async { [weak self] in
-                guard let strongSelf = self else { return }
-                strongSelf.products = products
-                strongSelf.collectionView.refreshControl?.endRefreshing()
-                strongSelf.collectionView.reloadData()
-            }
-    })
-        task.resume()
+        }
     }
 
     // MARK: - View Lifecycle
