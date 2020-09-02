@@ -43,7 +43,7 @@ public class WelcomeViewController: UIViewController {
         timer?.invalidate()
     }
 
-    internal func updateImageView(_: Timer) {
+    @objc internal func updateImageView(_: Timer) {
         index = (index + 1) < imageNames.count ? (index + 1) : 0
         imageView.image = UIImage(named: imageNames[index],
                                   in: Bundle(for: type(of: self)),

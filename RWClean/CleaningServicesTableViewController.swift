@@ -20,6 +20,6 @@ public class CleaningServicesTableViewController: UITableViewController {
     }
 
     public override func tableView(_: UITableView, heightForRowAt _: IndexPath) -> CGFloat {
-        return UITableViewAutomaticDimension
+        return UITableView.automaticDimension
     }
 }
