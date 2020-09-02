@@ -30,6 +30,4 @@
 
 import UIKit
 
-public class StartHomeInfoViewController: HomeInfoViewController {
-  
-}
+public class StartHomeInfoViewController: HomeInfoViewController {}
