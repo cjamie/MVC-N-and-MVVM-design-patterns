@@ -13,7 +13,7 @@ public class ProductDetailsViewController: UIViewController {
         
     // MARK: - Injections
 
-    var viewModel: ProductDetailsViewController.ViewModel!
+    var viewModel: ProductViewModel!
 
     // MARK: - Public
     
