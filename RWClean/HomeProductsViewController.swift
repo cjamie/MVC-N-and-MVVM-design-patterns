@@ -36,6 +36,8 @@ public class HomeProductsViewController: UIViewController {
             case .success(let products):
                 self?.products = products
             }
+            self?.collectionView.refreshControl?.endRefreshing()
+
         }
     }
 
@@ -59,7 +61,10 @@ public class HomeProductsViewController: UIViewController {
         guard let viewController = segue.destination as? ProductDetailsViewController else { return }
         let indexPath = collectionView.indexPathsForSelectedItems!.first!
         let product = products[indexPath.row]
-        viewController.product = product
+        viewController.viewModel = ProductDetailsViewController.ViewModel(
+            product: product,
+            numberFormatter: ProductDetailsViewController.ViewModel.numberFormatter
+        )
     }
 }
 
