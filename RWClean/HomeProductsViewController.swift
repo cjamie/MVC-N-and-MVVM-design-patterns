@@ -61,10 +61,7 @@ public class HomeProductsViewController: UIViewController {
         guard let viewController = segue.destination as? ProductDetailsViewController else { return }
         let indexPath = collectionView.indexPathsForSelectedItems!.first!
         let product = products[indexPath.row]
-        viewController.viewModel = ProductDetailsViewController.ViewModel(
-            product: product,
-            numberFormatter: ProductDetailsViewController.ViewModel.numberFormatter
-        )
+        viewController.viewModel = ProductDetailsViewController.ViewModel(product: product)
     }
 }
 

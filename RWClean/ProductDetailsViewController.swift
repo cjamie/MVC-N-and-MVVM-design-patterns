@@ -20,9 +20,8 @@ public class ProductDetailsViewController: UIViewController {
     struct ViewModel: ProductViewModel {
                 
         private let product: Product
-        private let numberFormatter: NumberFormatter
         
-        static let numberFormatter: NumberFormatter = {
+        private static let numberFormatter: NumberFormatter = {
             let numberFormatter = NumberFormatter()
             numberFormatter.locale = Locale(identifier: "en_US")
             numberFormatter.numberStyle = .currency
@@ -30,9 +29,8 @@ public class ProductDetailsViewController: UIViewController {
         }()
         
         
-        init(product: Product, numberFormatter: NumberFormatter) {
+        init(product: Product) {
             self.product = product
-            self.numberFormatter = numberFormatter
         }
         
         // MARK: - ProductViewModel
@@ -46,12 +44,12 @@ public class ProductDetailsViewController: UIViewController {
         var priceDescription: String {
             
             if product.priceHourly > 0 {
-                let price = numberFormatter.string(from: product.priceHourly as NSNumber)!
+                let price = Self.numberFormatter.string(from: product.priceHourly as NSNumber)!
                 return "Only \(price) / hour"
 
             } else if product.priceSquareFoot > 0 {
                 let price500SqFt = product.priceSquareFoot * 500
-                let price = numberFormatter.string(from: price500SqFt as NSNumber)!
+                let price = Self.numberFormatter.string(from: price500SqFt as NSNumber)!
                 return "\(price) / 500 ft²"
             } else {
                 return "Contact Us For Pricing"
