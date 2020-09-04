@@ -39,7 +39,7 @@ public class EmailValidator {
     }
 
     private static func isValidLocalName(_ string: String) -> Bool {
-        let original = string.characters
+        let original = string
         let valid = original.filter(isValid)
         return valid.count == original.count
     }

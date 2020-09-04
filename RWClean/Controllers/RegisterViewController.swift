@@ -128,7 +128,7 @@ extension RegisterViewController: UITextFieldDelegate {
 
     func textField(_ textField: UITextField, shouldChangeCharactersIn _: NSRange, replacementString string: String) -> Bool {
         guard textField == phoneNumberTextField else { return true }
-        let validCharacters = "0123456789".characters
-        return string.characters.filter(validCharacters.contains).count == string.characters.count
+        let validCharacters = "0123456789".map{$0}
+        return string.filter(validCharacters.contains).count == string.count
     }
 }

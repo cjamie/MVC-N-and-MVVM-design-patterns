@@ -64,15 +64,15 @@ public class AvoidKeyboardScrollView: UIScrollView {
 
     private func registerForKeyboardNotifications() {
         notificationCenter.addObserver(self, selector: #selector(keyboardWillShown(_:)),
-                                       name: .UIKeyboardWillShow, object: nil)
+                                       name: UIResponder.keyboardWillShowNotification, object: nil)
 
         notificationCenter.addObserver(self, selector: #selector(keyboardWillHide(_:)),
-                                       name: .UIKeyboardWillHide, object: nil)
+                                       name: UIResponder.keyboardWillHideNotification, object: nil)
     }
 
     @objc private func keyboardWillShown(_ notification: NSNotification) {
         let info = notification.userInfo!
-        let kbSize = (info[UIKeyboardFrameEndUserInfoKey] as! CGRect).size
+        let kbSize = (info[UIResponder.keyboardFrameEndUserInfoKey] as! CGRect).size
 
         contentInset = UIEdgeInsets(top: originalContentInset.top,
                                     left: originalContentInset.left,
@@ -89,8 +89,8 @@ public class AvoidKeyboardScrollView: UIScrollView {
 
     private func animateSetContentInset(_ value: UIEdgeInsets, info: [AnyHashable: Any]) {
         UIView.beginAnimations(nil, context: nil)
-        UIView.setAnimationDuration(info[UIKeyboardAnimationDurationUserInfoKey] as! Double)
-        UIView.setAnimationCurve(UIViewAnimationCurve(rawValue: info[UIKeyboardAnimationCurveUserInfoKey] as! Int)!)
+        UIView.setAnimationDuration(info[UIResponder.keyboardAnimationDurationUserInfoKey] as! Double)
+        UIView.setAnimationCurve(UIView.AnimationCurve(rawValue: info[UIResponder.keyboardAnimationCurveUserInfoKey] as! Int)!)
         UIView.setAnimationBeginsFromCurrentState(true)
         contentInset = value
         layoutIfNeeded()
