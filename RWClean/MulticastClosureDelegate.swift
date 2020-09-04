@@ -8,9 +8,6 @@
 
 import Foundation
 
-typealias Success = () -> Void
-typealias Failure = () -> Void
-
 public class MulticastClosureDelegate<Success, Failure> {
     // MARK: - Callback
 
