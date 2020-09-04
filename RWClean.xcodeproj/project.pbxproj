@@ -48,6 +48,7 @@
 		7D6BF72425003E2200C824D7 /* Int+HTTPStatusCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6BF72025003E2100C824D7 /* Int+HTTPStatusCode.swift */; };
 		7D6BF72525003E2200C824D7 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6BF72125003E2100C824D7 /* NetworkError.swift */; };
 		7D6BF72625003E2200C824D7 /* UIImageView+URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6BF72225003E2100C824D7 /* UIImageView+URL.swift */; };
+		7D6BF72C2502EE8500C824D7 /* MulticastClosureDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6BF72B2502EE8500C824D7 /* MulticastClosureDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -95,6 +96,7 @@
 		7D6BF72025003E2100C824D7 /* Int+HTTPStatusCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Int+HTTPStatusCode.swift"; sourceTree = "<group>"; };
 		7D6BF72125003E2100C824D7 /* NetworkError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		7D6BF72225003E2100C824D7 /* UIImageView+URL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+URL.swift"; sourceTree = "<group>"; };
+		7D6BF72B2502EE8500C824D7 /* MulticastClosureDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MulticastClosureDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +130,7 @@
 		422FEA5B1E675E8800AFDC41 /* RWClean */ = {
 			isa = PBXGroup;
 			children = (
+				7D6BF72A2502EE7000C824D7 /* MulticastClosureDelegate */,
 				7D6BF72725003E2700C824D7 /* Networking */,
 				422FEA731E67608200AFDC41 /* App */,
 				7D6BF70E2500343E00C824D7 /* Cleaning_Services */,
@@ -382,6 +385,14 @@
 			name = Models;
 			sourceTree = "<group>";
 		};
+		7D6BF72A2502EE7000C824D7 /* MulticastClosureDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				7D6BF72B2502EE8500C824D7 /* MulticastClosureDelegate.swift */,
+			);
+			name = MulticastClosureDelegate;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -478,6 +489,7 @@
 				7D6BF72425003E2200C824D7 /* Int+HTTPStatusCode.swift in Sources */,
 				42F84ABF1E6953120029C1E6 /* ProductCollectionViewCell.swift in Sources */,
 				4276FCB61EB3E629004E96B9 /* ParentPushSegue.swift in Sources */,
+				7D6BF72C2502EE8500C824D7 /* MulticastClosureDelegate.swift in Sources */,
 				7D6BF72325003E2200C824D7 /* NetworkClient.swift in Sources */,
 				422FEA8E1E676B6200AFDC41 /* KitchenSizeViewController.swift in Sources */,
 				42F162C01E6C382C00B90E22 /* CollectionViewCenterFlowLayout.swift in Sources */,
