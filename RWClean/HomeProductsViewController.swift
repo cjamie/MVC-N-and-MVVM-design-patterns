@@ -10,9 +10,10 @@ public class HomeProductsViewController: UIViewController {
             collectionView.reloadData()
         }
     }
+
     internal let session = URLSession.shared
     let productLoader: ProductLoader = NetworkClient.shared
-    
+
     // MARK: - Outlets
 
     @IBOutlet internal var collectionView: UICollectionView! {
@@ -28,16 +29,15 @@ public class HomeProductsViewController: UIViewController {
 
     @objc internal func loadProducts() {
         collectionView.refreshControl?.beginRefreshing()
-        
+
         productLoader.getProducts(for: .home) { [weak self] homeProductResult in
             switch homeProductResult {
-            case .failure(let networkError):
+            case let .failure(networkError):
                 print("-=- network error \(networkError.localizedDescription)")
-            case .success(let products):
+            case let .success(products):
                 self?.products = products
             }
             self?.collectionView.refreshControl?.endRefreshing()
-
         }
     }
 

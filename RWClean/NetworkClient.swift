@@ -31,9 +31,8 @@ public final class NetworkClient {
 
 extension NetworkClient: ProductLoader {
     func getProducts(for type: Product.ProductType, completion: @escaping ((Result<[Product], Error>) -> Void)) {
-        
         let finalURL = baseURL.appendingPathComponent("/products/\(type.rawValue)")
-        
+
         session.dataTask(with: finalURL) { data, _, error in
             if let error = error {
                 completion(.failure(NetworkError(error: error)))
@@ -49,17 +48,17 @@ extension NetworkClient: ProductLoader {
                     return
                 }
                 let products = Product.array(jsonArray: jsonObject)
-                Self.dispatch { completion(.success(products))}
-                
+                Self.dispatch { completion(.success(products)) }
+
             } catch {
                 Self.dispatch { completion(.failure(NetworkError(error: error))) }
                 return
             }
-            
+
         }.resume()
     }
-    
-    private static func dispatch(_ block: @escaping ()->Void){
+
+    private static func dispatch(_ block: @escaping () -> Void) {
         DispatchQueue.main.async(execute: block)
     }
 }

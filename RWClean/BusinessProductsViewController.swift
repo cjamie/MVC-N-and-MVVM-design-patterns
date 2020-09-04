@@ -12,7 +12,7 @@ public class BusinessProductsViewController: UIViewController {
     }
 
     let productLoader: ProductLoader = NetworkClient.shared
-    
+
     // MARK: - Outlets
 
     @IBOutlet internal var collectionView: UICollectionView! {
@@ -32,15 +32,13 @@ public class BusinessProductsViewController: UIViewController {
         productLoader.getProducts(for: .business) { [weak self] result in
             guard let self = self else { return }
             switch result {
-            case .success(let products):
+            case let .success(products):
                 self.products = products
-            case .failure(let error):
+            case let .failure(error):
                 print("-=- \(self) \(error.localizedDescription)")
             }
             self.collectionView.refreshControl?.endRefreshing()
-
         }
-    
     }
 
     // MARK: - View Lifecycle
@@ -75,7 +73,6 @@ extension BusinessProductsViewController: UICollectionViewDataSource {
     }
 
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-
         let product = products[indexPath.row]
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProductCollectionViewCell.reuseIdentifier, for: indexPath) as! ProductCollectionViewCell
         cell.label.text = product.title

@@ -31,27 +31,27 @@
 // Based on https://github.com/vapor/vapor/blob/master/Sources/Vapor/Validation/Convenience/Email.swift
 
 public class EmailValidator {
-  public static func validate(input value: String) -> Bool {
-    guard let localName = value.components(separatedBy: "@").first, isValidLocalName(localName) else {
-      return false
+    public static func validate(input value: String) -> Bool {
+        guard let localName = value.components(separatedBy: "@").first, isValidLocalName(localName) else {
+            return false
+        }
+        return value.range(of: ".@.+\\..", options: .regularExpression) != nil
     }
-    return value.range(of: ".@.+\\..", options: .regularExpression) != nil
-  }
-  
-  private static func isValidLocalName(_ string: String) -> Bool {
-    let original = string.characters
-    let valid = original.filter(isValid)
-    return valid.count == original.count
-  }
-  
-  private static func isValid(_ character: Character) -> Bool {
-    switch character {
-    case "a"..."z", "A"..."Z", "0"..."9":
-      return true
-    case "!", "#", "$", "%", "&", "'", "*", "+", "-", "/", "=", "?", "^", "_", "`", "{", "|", "}", "~", ".":
-      return true
-    default:
-      return false
+
+    private static func isValidLocalName(_ string: String) -> Bool {
+        let original = string.characters
+        let valid = original.filter(isValid)
+        return valid.count == original.count
     }
-  }
+
+    private static func isValid(_ character: Character) -> Bool {
+        switch character {
+        case "a" ... "z", "A" ... "Z", "0" ... "9":
+            return true
+        case "!", "#", "$", "%", "&", "'", "*", "+", "-", "/", "=", "?", "^", "_", "`", "{", "|", "}", "~", ".":
+            return true
+        default:
+            return false
+        }
+    }
 }

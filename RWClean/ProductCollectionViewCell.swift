@@ -8,9 +8,8 @@ public class ProductCollectionViewCell: UICollectionViewCell {
     @IBOutlet internal var imageView: UIImageView!
     @IBOutlet internal var label: UILabel!
 
-    
     static let reuseIdentifier = "ProductCollectionViewCell"
-    
+
     // MARK: - Class Constructors
 
     public class func nib() -> UINib {

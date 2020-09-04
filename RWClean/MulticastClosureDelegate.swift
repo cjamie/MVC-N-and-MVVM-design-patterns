@@ -12,28 +12,26 @@ typealias Success = () -> Void
 typealias Failure = () -> Void
 
 public class MulticastClosureDelegate<Success, Failure> {
-
     // MARK: - Callback
 
     class Callback {
         let success: Success
         let failure: Failure
         let queue: DispatchQueue
-        
+
         init(success: Success, failure: Failure, queue: DispatchQueue) {
             self.success = success
             self.failure = failure
             self.queue = queue
         }
-        
     }
 
     // MARK: - Instance Properties
 
     private let mapTable = NSMapTable<AnyObject, NSMutableArray>.weakToStrongObjects()
-        
+
     // MARK: - Public API
-    
+
     var count: Int {
         getAllCallBacks(removeAfter: false).count
     }
@@ -50,7 +48,7 @@ public class MulticastClosureDelegate<Success, Failure> {
         array.add(callBack)
         mapTable.setObject(array, forKey: objectKey)
     }
-    
+
     func getSuccessCallbacks(removeAfter: Bool = true) -> [(Success, DispatchQueue)] {
         getAllCallBacks(removeAfter: removeAfter).map { ($0.success, $0.queue) }
     }
@@ -60,22 +58,21 @@ public class MulticastClosureDelegate<Success, Failure> {
     }
 
     // MARK: - Helpers
-    
+
     // returns all callbacks. after they are retrieved, entries are removed by default unless specified otherwise
     private func getAllCallBacks(removeAfter: Bool = true) -> [Callback] {
         let objects = mapTable.keyEnumerator().allObjects as [AnyObject]
-        
+
         let callbacks: [[Callback]] = objects.compactMap { object in
             mapTable.object(forKey: object) as? [Callback]
         }
-         
+
         // NOTE: - temporal coupling
-        
+
         if removeAfter {
             objects.forEach(mapTable.removeObject)
         }
-        
+
         return callbacks.flatMap { $0 }
     }
-        
 }
